@@ -5,6 +5,9 @@ const burgerIngredient = (props) => {
   let ingredient = null;
 
   switch (type) {
+    default:
+      ingredient = null;
+      break;
     case "bread-bottom":
       ingredient = <div className="breadBottom" />;
       break;
@@ -15,7 +18,21 @@ const burgerIngredient = (props) => {
           <div className="seed2" />
         </div>
       );
+      break;
+    case "meat":
+      ingredient = <div className="meat" />;
+      break;
+    case "cheese":
+      ingredient = <div className="cheese" />;
+      break;
+    case "salad":
+      ingredient = <div className="salad" />;
+      break;
+    case "bacon":
+      ingredient = <div className="bacon" />;
+      break;
   }
+  return ingredient;
 };
 
 export default burgerIngredient;
