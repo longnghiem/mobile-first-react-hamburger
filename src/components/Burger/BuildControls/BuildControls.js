@@ -6,7 +6,7 @@ import("./BuildControls.css");
 
 const buildControls = (props) => {
   const {
-    addIngredient, subtractIngredient, disabled, price,
+    addIngredient, subtractIngredient, disabled, price, purchasable, order,
   } = props;
   const controls = [
     { label: "Salad", type: "salad", },
@@ -28,6 +28,9 @@ const buildControls = (props) => {
           disabled={disabled[control.type]}
         />
       ))}
+      <button type="button" className="orderButton" disabled={!purchasable} onClick={order}>
+        ORDER NOW
+      </button>
     </div>
   );
 };
@@ -37,6 +40,8 @@ buildControls.propTypes = {
   subtractIngredient: PropTypes.func.isRequired,
   disabled: PropTypes.shape({}).isRequired,
   price: PropTypes.number.isRequired,
+  purchasable: PropTypes.bool.isRequired,
+  order: PropTypes.func.isRequired,
 };
 
 export default buildControls;
