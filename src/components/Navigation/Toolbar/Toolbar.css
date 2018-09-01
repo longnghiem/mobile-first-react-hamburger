@@ -12,3 +12,17 @@
   box-sizing: border-box;
   z-index: 100;
 }
+
+.toolbar nav {
+  height: 100%;
+}
+
+.logoToolbar {
+  height: 80%;
+}
+
+@media (max-width: 499px) {
+  .desktopOnly {
+    display: none;
+  }
+}
