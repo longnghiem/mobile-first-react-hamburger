@@ -1,6 +1,8 @@
 import React, { Component, } from "react";
 import PropTypes from "prop-types";
+import { Route, } from "react-router-dom";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
+import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
   state = {
@@ -18,9 +20,11 @@ class Checkout extends Component {
     const query = new URLSearchParams(location.search);
     /* location.search =  ?salad=1&bacon=0&cheese=2&meat=2 */
     const currentIngredients = {};
+    /* eslint-disable */
     for (const param of query.entries()) {
       currentIngredients[param[0]] = +param[1];
     }
+    /* eslint-enable */
     this.setState({
       ingredients: currentIngredients,
     });
@@ -38,6 +42,7 @@ class Checkout extends Component {
 
   render() {
     const { ingredients, } = this.state;
+    const { match, } = this.props;
     return (
       <div>
         <CheckoutSummary
@@ -45,6 +50,7 @@ class Checkout extends Component {
           checkoutContinued={this.checkoutContinuedHandler}
           checkoutCancelled={this.checkoutCancelledHandler}
         />
+        <Route path={`${match.path}/contact-data`} component={ContactData} />
       </div>
     );
   }
@@ -53,6 +59,7 @@ class Checkout extends Component {
 Checkout.propTypes = {
   history: PropTypes.shape({}).isRequired,
   location: PropTypes.shape({}).isRequired,
+  match: PropTypes.shape({}).isRequired,
 };
 
 export default Checkout;
