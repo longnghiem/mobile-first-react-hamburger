@@ -10,7 +10,7 @@ const toolbar = (props) => {
   return (
     <header className="toolbar">
       <DrawerToggle click={toggleSideDrawer} />
-      <div className="logoToolbar desktopOnly">
+      <div className="logoToolbar">
         <Logo />
       </div>
       <nav className="desktopOnly">
