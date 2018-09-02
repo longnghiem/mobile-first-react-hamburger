@@ -1,5 +1,6 @@
 import React, { Component, } from "react";
 
+import PropTypes from "prop-types";
 import Aux from "../../hoc/Aux_Comp";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
@@ -86,7 +87,20 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     const { history, } = this.props;
-    history.push("/checkout");
+    const { ingredients, } = this.state;
+
+    // constructing the query string containing ingredients
+    const queryParams = [];
+    Object.keys(ingredients).forEach((key) => {
+      queryParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(ingredients[key])}`);
+    });
+    const queryString = queryParams.join("&");
+
+    history.push({
+      pathname: "/checkout",
+      search: `?${queryString}`,
+    });
+    // http://localhost:3000/checkout?salad=3&bacon=0&cheese=0&meat=0
   };
 
   render() {
@@ -122,5 +136,9 @@ class BurgerBuilder extends Component {
     );
   }
 }
+
+BurgerBuilder.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+};
 
 export default BurgerBuilder;
