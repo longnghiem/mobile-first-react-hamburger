@@ -13,7 +13,7 @@ const button = (props) => {
 
 button.propTypes = {
   click: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.string.isRequired,
   btnType: PropTypes.string.isRequired,
 };
 
