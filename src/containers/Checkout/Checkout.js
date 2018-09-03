@@ -6,27 +6,31 @@ import ContactData from "./ContactData/ContactData";
 
 class Checkout extends Component {
   state = {
-    ingredients: {
-      salad: 1,
-      meat: 1,
-      bacon: 1,
-      cheess: 1,
-    },
+    ingredients: null,
+    totalPrice: 0,
   };
 
-  componentDidMount() {
+  // componentWillMount is triggered before the rendering of Checkout, therefore it is ok to have
+  // the initial state as null
+  componentWillMount() {
     const { ingredients, } = this.state;
     const { location, } = this.props;
+    let price = 0;
     const query = new URLSearchParams(location.search);
     /* location.search =  ?salad=1&bacon=0&cheese=2&meat=2 */
     const currentIngredients = {};
     /* eslint-disable */
     for (const param of query.entries()) {
-      currentIngredients[param[0]] = Number(param[1]);
+      if (param[0] === "price") {
+        price = Number(param[1]);
+      } else {
+        currentIngredients[param[0]] = Number(param[1]);
+      }
     }
     /* eslint-enable */
     this.setState({
       ingredients: currentIngredients,
+      totalPrice: price,
     });
   }
 
@@ -41,7 +45,7 @@ class Checkout extends Component {
   };
 
   render() {
-    const { ingredients, } = this.state;
+    const { ingredients, totalPrice, } = this.state;
     const { match, } = this.props;
     return (
       <div>
@@ -52,7 +56,7 @@ class Checkout extends Component {
         />
         <Route
           path={`${match.path}/contact-data`}
-          render={() => <ContactData ingredients={ingredients} />}
+          render={() => <ContactData ingredients={ingredients} price={totalPrice} />}
         />
       </div>
     );

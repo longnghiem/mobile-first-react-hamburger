@@ -14,9 +14,10 @@ class ContactData extends Component {
   };
 
   orderHandler = (event) => {
-    const { ingredients, } = this.props;
+    const { ingredients, price, } = this.props;
     event.preventDefault();
     console.log("ordered ingredients: ", ingredients);
+    console.log("price: ", price);
     alert("order confirmed");
   };
 
@@ -40,6 +41,7 @@ class ContactData extends Component {
 
 ContactData.propTypes = {
   ingredients: PropTypes.shape({}).isRequired,
+  price: PropTypes.number.isRequired,
 };
 
 export default ContactData;

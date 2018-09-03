@@ -87,15 +87,15 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     const { history, } = this.props;
-    const { ingredients, } = this.state;
+    const { ingredients, totalPrice, } = this.state;
 
     // constructing the query string containing ingredients
     const queryParams = [];
     Object.keys(ingredients).forEach((key) => {
       queryParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(ingredients[key])}`);
     });
+    queryParams.push(`price=${totalPrice}`);
     const queryString = queryParams.join("&");
-
     history.push({
       pathname: "/checkout",
       search: `?${queryString}`,
@@ -115,14 +115,16 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
-       {purchasing && <Modal modalClosed={this.purchaseCancelHandler}>
-          <OrderSummary
-            ingredients={ingredients}
-            purchaseContinue={this.purchaseContinueHandler}
-            modalClosed={this.purchaseCancelHandler}
-            totalPrice={totalPrice}
-          />
-        </Modal>}
+        {purchasing && (
+          <Modal modalClosed={this.purchaseCancelHandler}>
+            <OrderSummary
+              ingredients={ingredients}
+              purchaseContinue={this.purchaseContinueHandler}
+              modalClosed={this.purchaseCancelHandler}
+              totalPrice={totalPrice}
+            />
+          </Modal>
+        )}
         <Burger ingredients={ingredients} />
         <BuildControls
           addIngredient={this.addIngredientHandler}
