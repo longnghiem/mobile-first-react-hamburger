@@ -9,8 +9,12 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import rootReducer from "./store/reducers";
 
-const store = createStore(rootReducer);
-
+/* eslint-disable*/
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+/* eslint-enable */
 const app = (
   <Provider store={store}>
     <BrowserRouter>

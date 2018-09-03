@@ -1,4 +1,5 @@
 import React, { Component, } from "react";
+import { connect, } from "react-redux";
 
 import PropTypes from "prop-types";
 import Aux from "../../hoc/Aux_Comp";
@@ -6,6 +7,7 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
+import * as actionTypes from "../../store/actions";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -16,65 +18,32 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
+    /* ingredients: {
       salad: 0,
       bacon: 0,
       cheese: 0,
       meat: 0,
-    },
+    }, */
     totalPrice: 4,
-    purchasable: false,
     purchasing: false,
   };
 
   updatePurchaseState = () => {
-    const { ingredients, } = this.state;
-    const ingredientsCopy = { ...ingredients, };
-    const amountOfIngredients = Object.values(ingredientsCopy).reduce((sum, value) => sum + value);
-    this.setState({
-      purchasable: amountOfIngredients > 0,
-    });
+    const { ingredients, } = this.props;
+    const amountOfIngredients = Object.values(ingredients).reduce((sum, value) => sum + value);
+    return amountOfIngredients > 0;
   };
 
   addIngredientHandler = (type) => {
-    const { ingredients, totalPrice, } = this.state;
-    const updatedIngredients = { ...ingredients, };
-    updatedIngredients[type] += 1;
-
-    const priceAddition = INGREDIENT_PRICES[type];
-    let updatedTotalPrice = totalPrice;
-    updatedTotalPrice += priceAddition;
-    this.setState(
-      {
-        ingredients: updatedIngredients,
-        totalPrice: updatedTotalPrice,
-      },
-      () => {
-        this.updatePurchaseState();
-      }
-    );
+    /* const { totalPrice, } = this.state; */
+    const { add, } = this.props;
+    add(type);
   };
 
   removeIngredientHandler = (type) => {
-    const { ingredients, totalPrice, } = this.state;
-    const updatedIngredients = { ...ingredients, };
-    if (updatedIngredients[type] === 0) {
-      return;
-    }
-    updatedIngredients[type] -= 1;
-
-    const priceSubtraction = INGREDIENT_PRICES[type];
-    let updatedTotalPrice = totalPrice;
-    updatedTotalPrice -= priceSubtraction;
-    this.setState(
-      {
-        ingredients: updatedIngredients,
-        totalPrice: updatedTotalPrice,
-      },
-      () => {
-        this.updatePurchaseState();
-      }
-    );
+    /*  const { totalPrice, } = this.state; */
+    const { remove, } = this.props;
+    remove(type);
   };
 
   purchaseHandler = () => {
@@ -86,8 +55,8 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    const { history, } = this.props;
-    const { ingredients, totalPrice, } = this.state;
+    const { ingredients, history, } = this.props;
+    const { totalPrice, } = this.state;
 
     // constructing the query string containing ingredients
     const queryParams = [];
@@ -104,9 +73,8 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const {
-      ingredients, totalPrice, purchasable, purchasing,
-    } = this.state;
+    const { totalPrice, purchasing, } = this.state;
+    const { ingredients, } = this.props;
     const disableInfo = { ...ingredients, };
 
     Object.keys(disableInfo).forEach((key) => {
@@ -131,7 +99,7 @@ class BurgerBuilder extends Component {
           subtractIngredient={this.removeIngredientHandler}
           disabled={disableInfo}
           price={totalPrice}
-          purchasable={purchasable}
+          purchasable={this.updatePurchaseState()}
           order={this.purchaseHandler}
         />
       </Aux>
@@ -141,6 +109,21 @@ class BurgerBuilder extends Component {
 
 BurgerBuilder.propTypes = {
   history: PropTypes.shape({}).isRequired,
+  ingredients: PropTypes.shape({}).isRequired,
+  add: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
-export default BurgerBuilder;
+const mapStateToProps = state => ({
+  ingredients: state.ingre.ingredients,
+});
+
+const mapDispatchToProps = dispatch => ({
+  add: ingredientName => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName, }),
+  remove: ingredientName => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName, }),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BurgerBuilder);
