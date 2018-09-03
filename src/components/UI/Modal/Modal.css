@@ -1,5 +1,16 @@
+@keyframes slide-from-top {
+  0% {
+    transform: translateY(-100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .modal {
   position: fixed;
+  animation-name: slide-from-top;
+  animation-duration: 0.5s;
   z-index: 500;
   background-color: white;
   width: 70%;
@@ -9,6 +20,7 @@
   left: 15%;
   top: 30%;
   box-sizing: border-box;
+
   transition: all 0.3s ease-out;
 }
 

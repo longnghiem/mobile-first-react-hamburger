@@ -22,7 +22,7 @@ class Checkout extends Component {
     const currentIngredients = {};
     /* eslint-disable */
     for (const param of query.entries()) {
-      currentIngredients[param[0]] = +param[1];
+      currentIngredients[param[0]] = Number(param[1]);
     }
     /* eslint-enable */
     this.setState({
@@ -50,7 +50,10 @@ class Checkout extends Component {
           checkoutContinued={this.checkoutContinuedHandler}
           checkoutCancelled={this.checkoutCancelledHandler}
         />
-        <Route path={`${match.path}/contact-data`} component={ContactData} />
+        <Route
+          path={`${match.path}/contact-data`}
+          render={() => <ContactData ingredients={ingredients} />}
+        />
       </div>
     );
   }

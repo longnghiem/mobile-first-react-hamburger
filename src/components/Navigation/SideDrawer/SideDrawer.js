@@ -12,7 +12,7 @@ const sideDrawer = (props) => {
   const sideDrawerClasses = SideDrawershowed ? "sideDrawer open" : "sideDrawer close";
   return (
     <Aux>
-      <Backdrop show={SideDrawershowed} click={closeSideDrawer} />
+      {SideDrawershowed && <Backdrop click={closeSideDrawer} />}
       <div className={sideDrawerClasses}>
         <div className="logoSideDrawer">
           <Logo />

@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 
 import("./Backdrop.css");
 
-const backdrop = ({ show, click, }) => (show ? <div className="backdrop" onClick={click} /> : null);
+const backdrop = ({ click, }) => <div className="backdrop" onClick={click} />;
 
 backdrop.propTypes = {
-  show: PropTypes.bool.isRequired,
   click: PropTypes.func.isRequired,
 };
 export default backdrop;
