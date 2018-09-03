@@ -1,13 +1,21 @@
 import React, { Component, } from "react";
-import Button from "../../../components/UI/Button/Button";
-import "./ContactData.css";
 import PropTypes from "prop-types";
+import Button from "../../../components/UI/Button/Button";
+import Input from "../../../components/UI/Input/Input";
+import "./ContactData.css";
 
 class ContactData extends Component {
   state = {
-    name: "",
-    email: "",
-    address: {
+    orderForm: {
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Name",
+        },
+        value: "",
+      },
+      email: "",
       street: "",
       postalCode: "",
     },
@@ -26,10 +34,10 @@ class ContactData extends Component {
       <div className="contactData">
         <h4>Please enter your contact info</h4>
         <form>
-          <input type="text" name="name" placeholder="Your name" />
-          <input type="email" name="email" placeholder="Your email" />
-          <input type="text" name="street" placeholder="Street" />
-          <input type="text" name="postal" placeholder="Postal Code" />
+          <Input inputtype="input" type="text" name="name" placeholder="Your name" />
+          <Input inputtype="input" type="email" name="email" placeholder="Your email" />
+          <Input inputtype="input" type="text" name="street" placeholder="Street" />
+          <Input inputtype="input" type="text" name="postal" placeholder="Postal Code" />
           <Button btnType="success" click={this.orderHandler} type="submit">
             ORDER
           </Button>
