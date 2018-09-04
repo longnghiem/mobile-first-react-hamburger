@@ -22,11 +22,13 @@ class ContactData extends Component {
   };
 
   orderHandler = (event) => {
-    const { ingredients, price, } = this.props;
+    const { ingredients, price, history, } = this.props;
     event.preventDefault();
     console.log("ordered ingredients: ", ingredients);
     console.log("price: ", price);
+    console.log("props: ", this.props);
     alert("order confirmed");
+    history.push("/");
   };
 
   render() {
@@ -49,6 +51,7 @@ class ContactData extends Component {
 
 ContactData.propTypes = {
   ingredients: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape({}).isRequired,
   price: PropTypes.number.isRequired,
 };
 
