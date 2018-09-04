@@ -1,58 +1,63 @@
-import React, { Component, } from "react";
+import React from "react";
+import { Field, reduxForm, } from "redux-form";
 import PropTypes from "prop-types";
 import Button from "../../../components/UI/Button/Button";
-import Input from "../../../components/UI/Input/Input";
 import "./ContactData.css";
 
-class ContactData extends Component {
-  state = {
-    orderForm: {
-      name: {
-        elementType: "input",
-        elementConfig: {
-          type: "text",
-          placeholder: "Your Name",
-        },
-        value: "",
-      },
-      email: "",
-      street: "",
-      postalCode: "",
-    },
-  };
-
-  orderHandler = (event) => {
-    const { ingredients, price, history, } = this.props;
+const contactData = (props) => {
+  const {
+    ingredients, price, history, handleSubmit,
+  } = props;
+  const orderHandler = (event) => {
     event.preventDefault();
     console.log("ordered ingredients: ", ingredients);
     console.log("price: ", price);
-    console.log("props: ", this.props);
     alert("order confirmed");
     history.push("/");
   };
 
-  render() {
-    return (
-      <div className="contactData">
-        <h4>Please enter your contact info</h4>
-        <form>
-          <Input inputtype="input" type="text" name="name" placeholder="Your name" />
-          <Input inputtype="input" type="email" name="email" placeholder="Your email" />
-          <Input inputtype="input" type="text" name="street" placeholder="Street" />
-          <Input inputtype="input" type="text" name="postal" placeholder="Postal Code" />
-          <Button btnType="success" click={this.orderHandler} type="submit">
-            ORDER
-          </Button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="contactData">
+      <h4>Please enter your contact info</h4>
+      <form onSubmit={handleSubmit}>
+        <Field
+          className="input"
+          name="name"
+          component="input"
+          type="text"
+          placeholder="Your Name"
+        />
+        <Field
+          className="input"
+          name="email"
+          component="input"
+          type="email"
+          placeholder="Your Email"
+        />
+        <Field className="input" name="street" component="input" type="text" placeholder="Street" />
+        <Field
+          className="input"
+          name="postal"
+          component="input"
+          type="text"
+          placeholder="Postal Code"
+        />
 
-ContactData.propTypes = {
+        <Button btnType="success" click={orderHandler} type="submit">
+          ORDER
+        </Button>
+      </form>
+    </div>
+  );
+};
+
+contactData.propTypes = {
   ingredients: PropTypes.shape({}).isRequired,
   history: PropTypes.shape({}).isRequired,
   price: PropTypes.number.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
-export default ContactData;
+export default reduxForm({
+  form: "contact",
+})(contactData);

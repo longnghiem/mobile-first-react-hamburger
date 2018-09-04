@@ -8,6 +8,20 @@
   box-sizing: border-box;
 }
 
+form {
+  margin: 0 10px;
+}
+
+.input {
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 6px 10px;
+  margin: 5px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 @media (min-width: 600px) {
   .contactData {
     width: 500px;
