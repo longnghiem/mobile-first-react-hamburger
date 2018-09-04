@@ -82,7 +82,6 @@ BurgerBuilder.propTypes = {
 const mapStateToProps = state => ({
   ingredients: getAllIngredients(state),
   totalPrice: getTotalPrice(state),
-  /* forgottenIngredients: getForgottenIngredients(state), */
 });
 
 const mapDispatchToProps = dispatch => ({
