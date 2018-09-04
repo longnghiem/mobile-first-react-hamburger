@@ -7,7 +7,8 @@ import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
-import * as actionTypes from "../../store/actions";
+import * as Actions from "../../store/actions";
+import { getTotalPrice, getAllIngredients, } from "../../store/reducers";
 
 class BurgerBuilder extends Component {
   state = {
@@ -79,13 +80,14 @@ BurgerBuilder.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  ingredients: state.ingre.ingredients,
-  totalPrice: state.ingre.totalPrice,
+  ingredients: getAllIngredients(state),
+  totalPrice: getTotalPrice(state),
+  /* forgottenIngredients: getForgottenIngredients(state), */
 });
 
 const mapDispatchToProps = dispatch => ({
-  add: ingredientName => dispatch({ type: actionTypes.ADD_INGREDIENT, ingredientName, }),
-  remove: ingredientName => dispatch({ type: actionTypes.REMOVE_INGREDIENT, ingredientName, }),
+  add: ingreName => dispatch(Actions.addIngredient(ingreName)),
+  remove: ingreName => dispatch(Actions.removeIngredient(ingreName)),
 });
 
 export default connect(

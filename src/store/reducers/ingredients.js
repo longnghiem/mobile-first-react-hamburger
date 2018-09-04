@@ -1,9 +1,9 @@
-import * as actionTypes from "../actions";
+import * as actionTypes from "../actions/actionTypes";
 
 const INGREDIENT_PRICES = {
-  salad: 0.5,
+  salad: 0.6,
   cheese: 0.4,
-  meat: 1.5,
+  meat: 1.4,
   bacon: 1,
 };
 const initialState = {
