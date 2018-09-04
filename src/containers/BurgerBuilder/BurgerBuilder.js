@@ -20,16 +20,6 @@ class BurgerBuilder extends Component {
     return amountOfIngredients > 0;
   };
 
-  addIngredientHandler = (type) => {
-    const { add, } = this.props;
-    add(type);
-  };
-
-  removeIngredientHandler = (type) => {
-    const { remove, } = this.props;
-    remove(type);
-  };
-
   purchaseHandler = () => {
     this.setState({ purchasing: true, });
   };
@@ -57,7 +47,9 @@ class BurgerBuilder extends Component {
 
   render() {
     const { purchasing, } = this.state;
-    const { ingredients, totalPrice, } = this.props;
+    const {
+      ingredients, totalPrice, add, remove,
+    } = this.props;
     const disableInfo = { ...ingredients, };
 
     Object.keys(disableInfo).forEach((key) => {
@@ -78,8 +70,8 @@ class BurgerBuilder extends Component {
         )}
         <Burger ingredients={ingredients} />
         <BuildControls
-          addIngredient={this.addIngredientHandler}
-          subtractIngredient={this.removeIngredientHandler}
+          addIngredient={add}
+          subtractIngredient={remove}
           disabled={disableInfo}
           price={totalPrice}
           purchasable={this.updatePurchaseState()}

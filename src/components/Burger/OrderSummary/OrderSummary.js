@@ -25,7 +25,7 @@ class OrderSummary extends Component {
         <ul>{ingredientSummary}</ul>
         <p>Continue to checkout?</p>
         <p>
-          <strong>Total price is: ${totalPrice.toFixed(2)}</strong>{" "}
+          <strong>Total price is: ${totalPrice.toFixed(2)}</strong>
         </p>
         <Button click={modalClosed} btnType="danger">
           CANCEL
