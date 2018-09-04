@@ -9,22 +9,8 @@ import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import * as actionTypes from "../../store/actions";
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  meat: 1.5,
-  bacon: 1,
-};
-
 class BurgerBuilder extends Component {
   state = {
-    /* ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0,
-    }, */
-    totalPrice: 4,
     purchasing: false,
   };
 
@@ -35,13 +21,11 @@ class BurgerBuilder extends Component {
   };
 
   addIngredientHandler = (type) => {
-    /* const { totalPrice, } = this.state; */
     const { add, } = this.props;
     add(type);
   };
 
   removeIngredientHandler = (type) => {
-    /*  const { totalPrice, } = this.state; */
     const { remove, } = this.props;
     remove(type);
   };
@@ -55,8 +39,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    const { ingredients, history, } = this.props;
-    const { totalPrice, } = this.state;
+    const { ingredients, history, totalPrice, } = this.props;
 
     // constructing the query string containing ingredients
     const queryParams = [];
@@ -73,8 +56,8 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const { totalPrice, purchasing, } = this.state;
-    const { ingredients, } = this.props;
+    const { purchasing, } = this.state;
+    const { ingredients, totalPrice, } = this.props;
     const disableInfo = { ...ingredients, };
 
     Object.keys(disableInfo).forEach((key) => {
@@ -112,10 +95,12 @@ BurgerBuilder.propTypes = {
   ingredients: PropTypes.shape({}).isRequired,
   add: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
+  totalPrice: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
   ingredients: state.ingre.ingredients,
+  totalPrice: state.ingre.totalPrice,
 });
 
 const mapDispatchToProps = dispatch => ({
