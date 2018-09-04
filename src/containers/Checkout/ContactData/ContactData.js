@@ -43,6 +43,15 @@ const contactData = (props) => {
           placeholder="Postal Code"
         />
 
+        <div className="gender">
+          <label htmlFor="male">
+            <Field name="gender" id="male" component="input" type="radio" value="male" /> Male
+          </label>
+          <label htmlFor="female">
+            <Field name="gender" id="female" component="input" type="radio" value="female" /> Female
+          </label>
+        </div>
+
         <Button btnType="success" click={orderHandler} type="submit">
           ORDER
         </Button>

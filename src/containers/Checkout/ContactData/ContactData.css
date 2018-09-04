@@ -22,6 +22,14 @@ form {
   box-sizing: border-box;
 }
 
+label {
+  margin: 0 20px;
+}
+
+.gender {
+  margin-top: 10px;
+}
+
 @media (min-width: 600px) {
   .contactData {
     width: 500px;
