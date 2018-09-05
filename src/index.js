@@ -17,7 +17,7 @@ const store = createStore(
 /* eslint-enable */
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/mobile-first-react-hamburger">
       <App />
     </BrowserRouter>
   </Provider>
