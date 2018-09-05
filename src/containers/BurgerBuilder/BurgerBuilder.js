@@ -15,7 +15,7 @@ class BurgerBuilder extends Component {
     purchasing: false,
   };
 
-  updatePurchaseState = () => {
+  enableOrderBtn = () => {
     const { ingredients, } = this.props;
     const amountOfIngredients = Object.values(ingredients).reduce((sum, value) => sum + value);
     return amountOfIngredients > 0;
@@ -63,7 +63,7 @@ class BurgerBuilder extends Component {
           subtractIngredient={remove}
           disabled={disableInfo}
           price={totalPrice}
-          purchasable={this.updatePurchaseState()}
+          purchasable={this.enableOrderBtn()}
           order={this.purchaseHandler}
         />
       </Aux>
