@@ -4,7 +4,7 @@ import "./NavigationItems.css";
 
 const navigationItems = () => (
   <ul className="navigationItems">
-    <NavigationItem link="/" active>
+    <NavigationItem link="/mobile-first-react-hamburger" active>
       Burger Builder
     </NavigationItem>
   </ul>
