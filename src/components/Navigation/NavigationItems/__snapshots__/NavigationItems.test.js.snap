@@ -20,7 +20,7 @@ ShallowWrapper {
       "props": Object {
         "children": <navigationItem
           active={true}
-          link="/"
+          link="/mobile-first-react-hamburger"
 >
           Burger Builder
 </navigationItem>,
@@ -34,7 +34,7 @@ ShallowWrapper {
         "props": Object {
           "active": true,
           "children": "Burger Builder",
-          "link": "/",
+          "link": "/mobile-first-react-hamburger",
         },
         "ref": null,
         "rendered": "Burger Builder",
@@ -50,7 +50,7 @@ ShallowWrapper {
         "props": Object {
           "children": <navigationItem
             active={true}
-            link="/"
+            link="/mobile-first-react-hamburger"
 >
             Burger Builder
 </navigationItem>,
@@ -64,7 +64,7 @@ ShallowWrapper {
           "props": Object {
             "active": true,
             "children": "Burger Builder",
-            "link": "/",
+            "link": "/mobile-first-react-hamburger",
           },
           "ref": null,
           "rendered": "Burger Builder",
@@ -109,7 +109,7 @@ ShallowWrapper {
     "props": Object {
       "active": true,
       "children": "Burger Builder",
-      "link": "/",
+      "link": "/mobile-first-react-hamburger",
     },
     "ref": null,
     "rendered": "Burger Builder",
@@ -123,7 +123,7 @@ ShallowWrapper {
       "props": Object {
         "active": true,
         "children": "Burger Builder",
-        "link": "/",
+        "link": "/mobile-first-react-hamburger",
       },
       "ref": null,
       "rendered": "Burger Builder",
